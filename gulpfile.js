@@ -2,11 +2,11 @@ var gulp = require('gulp');
 var git = require('gulp-git');
 
 gulp.task('add', function(){
-  return gulp.src('../booking/*').pipe(git.add({args: '--all'}));
+  return gulp.src('./booking/*').pipe(git.add({args: '--all'}));
 });
 
     gulp.task('commit',['add'],function(){
-  return gulp.src('../booking/*').pipe(git.commit('commit'));
+  return gulp.src('./booking/*').pipe(git.commit('commit'));
     });
 
     gulp.task('push', function(){
@@ -17,5 +17,6 @@ gulp.task('add', function(){
 
  
     gulp.task('git',['commit','push']);
+
 
 
