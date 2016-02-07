@@ -15,6 +15,7 @@ gulp.task('add', function(){
   });
 });
 
-    gulp.task('default',['add','commit','push']);
+ 
+    gulp.task('git',['commit','push']);
 
 
