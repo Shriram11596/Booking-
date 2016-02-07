@@ -9,7 +9,7 @@ gulp.task('add', function(){
   return gulp.src('./booking/*').pipe(git.commit('commit'));
     });
 
-    gulp.task('push', function(){
+    gulp.task('push',['commit'], function(){
   git.push('origin', 'master', function (err) {
     if (err) throw err;
   });
