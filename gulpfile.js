@@ -5,7 +5,7 @@ gulp.task('add', function(){
   return gulp.src('./booking/*').pipe(git.add({args: '--all'}));
 });
 
-    gulp.task('commit',function(){
+    gulp.task('commit',['add'],function(){
   return gulp.src('./booking/*').pipe(git.commit('pushing changes'));
     });
 
@@ -16,6 +16,6 @@ gulp.task('add', function(){
 });
 
  
-    gulp.task('git',['commit','push']);
+    gulp.task('git',['add','commit','push']);
 
 
