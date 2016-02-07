@@ -19,4 +19,3 @@ gulp.task('add', function(){
     gulp.task('git',['commit','push']);
 
 
-
