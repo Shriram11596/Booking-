@@ -9,13 +9,12 @@ gulp.task('add', function(){
   return gulp.src('./booking/*').pipe(git.commit('commit'));
     });
 
-    gulp.task('push',['commit'], function(){
+    gulp.task('default',['commit'], function(){
   git.push('origin', 'master', function (err) {
     if (err) throw err;
   });
 });
 
  
-    gulp.task('git',['commit','push']);
 
 
