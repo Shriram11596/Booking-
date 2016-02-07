@@ -1,0 +1,40 @@
+@import "http://fonts.googleapis.com/css?family=Raleway:400,300,800|Lora:400italic|Playfair+Display:700";
+@import "http://fonts.googleapis.com/css?family=Montserrat";
+* {
+font-family: 'Montserrat', sans-serif;
+}
+
+#map-canvas
+{
+  height: 482px;
+  width: auto;
+  border: 1px solid #000;
+}
+
+#content-pane {
+  float: right;
+  width: 48%;
+  padding-left: 2%;
+}
+#outputDiv {
+  font-size: 17px;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}

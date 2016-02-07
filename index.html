@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="../css/homepage.css">
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--for adding fonticons -->
+
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-touch/angular-touch.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-route/angular-route.min.js"></script>
+
+    <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script type="text/javascript" src="../js/scripts.js"></script>
+
+    <script type="text/javascript" src="../js/app.js"></script>
+
+
+
+
+
+
+  </head>
+  <body>
+
+<div ng-app="transport">
+
+
+  <div ng-view>
+
+
+  </div>
+    <section class="navigation">
+      <header>
+        <div class="header-content">
+          <div class="logo">
+            <a href="#"><img src="" alt="Logo here"></a>
+          </div>
+          <div class="header-nav">
+            <nav id="nav" class="">
+              <ul class="primary-nav animated fadeInDown">
+                <li>
+                  <a href="../index.html">HOME</a>
+                </li>
+                <li>
+                  <a href="#about">ABOUT</a>
+                </li>
+
+                <li>
+                  <a href="#tariff">TARIFF</a>
+                </li>
+                <li>
+                  <a href="gallery.html">GALLERY</a>
+                </li>
+              </ul>
+              <ul class="deliver">
+                <li>
+                  <a href="../booking.html" class="btn-white btn-small ">DELIVER IT!</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="navicon">
+            <a class="nav-toggle" href="#">
+              <span></span>
+            </a>
+          </div>
+        </div>
+      </header>
+    </section>
+    <!--header ends-->
+
+    <!--carousel-->
+
+      <div class = "row">
+
+      <div ng-controller="CarouselCtrl" id="slides_control" class="col-md-6">
+        <div id="top">
+          <uib-carousel interval="3000" class="carousel-image">
+            <uib-slide ng-repeat="slide in slides" active="slide.active">
+              <img ng-src="{{slide.image}}" style="margin:auto;">
+              <div class="carousel-caption  ">
+                <h2 class="slider-caption " id="slide1" ng-class="{'animated fadeInLeft' : slide.id == 1,'animated fadeInDown' : slide.id == 2,'animated fadeInRight' : slide.id == 3 }">{{slide.caption}}</h2>
+                <h5 class="slider-subcaption animated fadeInUp">{{slide.subtext}}</h5>
+              </div>
+              <a class="btn btn-info btn-book-now" style="pointer-events: auto; cursor: pointer; " href="../booking.html">BOOK NOW</a>
+            </uib-slide>
+          </uib-carousel>
+        </div>
+      </div>
+    </div>
+
+    <!--end carousel-->
+
+    <!--about-->
+    <div class="col-md-12 " id="about">
+      <div class="custom-heading">
+        <h3 style="font-weight:800">ABOUT US</h3>
+        <p>COMPANY MOTTO HERE</p>
+      </div>
+
+      <div class="col-md-6 " style="">
+        <div class="custom-heading">
+          <h4 class="sub-heading">WHAT WE DO</h4>
+        </div>
+        <div >
+          <p>Lorem ipsum dolor sit amet, vel et accusamus persequeris, consul officiis vis ea. Ut quaestio mediocrem dissentiunt cum. Populo iracundia duo at, veniam ceteros verterem qui cu. Pri at eruditi tractatos philosophia, eros illum aperiam id est. Nam id decore dissentiunt, semper diceret cotidieque at pri. Sed in feugiat suavitate. Mei cu sale integre, has utinam iracundia at.Te est diceret alienum voluptua, ut cum fuisset fierent. Ne pri nibh aperiam dolorem, te nam ullum ubique laoreet. Corrumpit scriptorem ne usu, in vel utroque consulatu philosophia. No usu ubique inermis voluptaria, dicat volumus per ad, ne cum elit habeo laoreet. Te sanctus fierent postulant quo, ei quo discere dolores, malis iudicabit consetetur mel ne.
+          </p>
+          <p>Lorem ipsum dolor sit amet, vel et accusamus persequeris, consul officiis vis ea. Ut quaestio mediocrem dissentiunt cum. Populo iracundia duo at, veniam ceteros verterem qui cu. Pri at eruditi tractatos philosophia, eros illum aperiam id est. Nam id decore dissentiunt, semper diceret cotidieque at pri.
+          </p>
+        </div>
+      </div>
+
+      <section class="page-content">
+        <section class="container">
+          <div class="row" style="">
+            <div class="col-md-6 " style="">
+              <div class="custom-heading">
+                <h4 class="sub-heading">OUR MISSION</h4>
+              </div>
+              <div >
+                <p>Lorem ipsum dolor sit amet, vel et accusamus persequeris, consul officiis vis ea. Ut quaestio mediocrem dissentiunt cum. Populo iracundia duo at, veniam ceteros verterem qui cu. Pri at eruditi tractatos philosophia, eros illum aperiam id est. Nam id decore dissentiunt, semper diceret cotidieque at pri. Sed in feugiat suavitate. Mei cu sale integre, has utinam iracundia at.Te est diceret alienum voluptua, ut cum fuisset fierent. Ne pri nibh aperiam dolorem, te nam ullum ubique laoreet. Corrumpit scriptorem ne usu, in vel utroque consulatu philosophia. No usu ubique inermis voluptaria, dicat volumus per ad, ne cum elit habeo laoreet. Te sanctus fierent postulant quo, ei quo discere dolores, malis iudicabit consetetur mel ne.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+    </div>
+    <div class="parallax" id="parallax1"></div>
+
+    <div class="col-md-12" id="tariff">
+      <div class="custom-heading">
+        <h2 class="tariff-heading">TARIFF</h2>
+        <p></p>
+
+      </div>
+      <div class="col-md-4 p-t-md wp wp-5 animated fadeInRight" id="pricing-one">
+        <div class="card pricing-box">
+          <div class="card-header  ">
+            LIGHT TRUCK (14 ft)
+          </div>
+          <div class="card-block">
+            <p class="card-title">Details regarding weight and cost ratio here</p>
+            <h4 class="card-text">
+              <span class="pricing-box-currency">Rs.</span>
+              <span class="pricing-box-price">11</span>
+              <small class="text-muted  ">/KM</small>
+            </h4>
+          </div>
+          <ul class="list-group list-group-flush p-x">
+            <li class="list-group-item">Other details 1
+            </li>
+            <li class="list-group-item">Other details 2</li>
+            <li class="list-group-item">Other details 3</li>
+          </ul>
+          <a href="#" id="choose" class="btn choose">CHOOSE</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 p-t-md wp wp-5 animated fadeInRight" id="pricing-two">
+        <div class="card pricing-box">
+          <div class="card-header  ">
+            MEDIUM TRUCK (17 ft)
+          </div>
+          <div class="card-block">
+            <p class="card-title">Details regarding weight and cost ratio here</p>
+            <h4 class="card-text">
+              <span class="pricing-box-currency">Rs.</span>
+              <span class="pricing-box-price">11</span>
+              <small class="text-muted  ">/KM</small>
+            </h4>
+          </div>
+          <ul class="list-group list-group-flush p-x">
+            <li class="list-group-item">Other details 1
+            </li>
+            <li class="list-group-item">Other details 2</li>
+            <li class="list-group-item">Other details 3</li>
+          </ul>
+          <a href="#" class="btn choose">CHOOSE</a>
+        </div>
+      </div>
+
+      <div class="col-md-4 p-t-md wp wp-5 animated fadeInRight" id="pricing-three">
+        <div class="card pricing-box">
+          <div class="card-header  ">
+            HEAVY TRUCK (19 ft)
+          </div>
+          <div class="card-block">
+            <p class="card-title">Details regarding weight and cost ratio here</p>
+            <h4 class="card-text">
+              <span class="pricing-box-currency">Rs.</span>
+              <span class="pricing-box-price">11</span>
+              <small class="text-muted  ">/KM</small>
+            </h4>
+          </div>
+          <ul class="list-group list-group-flush p-x">
+            <li class="list-group-item">Other details 1
+            </li>
+            <li class="list-group-item">Other details 2</li>
+            <li class="list-group-item">Other details 3</li>
+          </ul>
+          <a href="#" class="btn choose">CHOOSE</a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="footer-wrapper" class="footer-dark">
+      <footer id="footer">
+        <div class="container">
+          <div class="row">
+
+            <ul class="col-md-3 col-sm-6 footer-widget-container">
+              <!-- .widget-pages start -->
+              <li class="widget widget_pages">
+                <div >
+                  <h5 class="title">quick links</h5>
+                </div>
+
+                <ul>
+                  <li>
+                    <a href="about01.html">About us</a>
+                  </li>
+                  <li>
+                    <a href="company-history.html">Company history</a>
+                  </li>
+                  <li>
+                    <a href="events.html">Company Events</a>
+                  </li>
+                  <li>
+                    <a href="">Book Now</a>
+
+                  </li>
+
+                </ul>
+              </li>
+              <!-- .widget-pages end -->
+            </ul>
+            <!-- .col-md-3.footer-widget-container end -->
+
+            <ul class="col-md-3 col-sm-6 footer-widget-container">
+              <!-- .widget-pages start -->
+              <li class="widget widget_pages">
+                <div >
+                  <h5 class="title">Industry solutions</h5>
+                </div>
+
+                <ul>
+                  <li>
+                    <a href="overland-transportation.html">Overland transportation</a>
+                  </li>
+
+                  <li>
+                    <a href="packaging-options.html">Packaging options</a>
+                  </li>
+
+                </ul>
+              </li>
+              <!-- .widget-pages end -->
+            </ul>
+            <!-- .col-md-3.footer-widget-container end -->
+
+            <ul class="col-md-3 col-sm-6 footer-widget-container">
+              <li class="widget widget-text">
+                <div >
+                  <h5 class="title">contact us</h5>
+                </div>
+
+                <address>
+                  123 Second Street Fifth Avenue,
+                  <br>
+                  Chennai, Tamil Nadu
+                </address>
+
+                <span class="text-big">
+                  044 223 1111 6789
+                </span>
+                <br>
+
+                <a href="mailto:">mailaddress@transport.com</a>
+                <br>
+
+              </li>
+              <!-- .widget.widget-text end -->
+            </ul>
+            <!-- .col-md-3.footer-widget-container end -->
+          </div>
+          <!-- .row end -->
+        </div>
+        <!-- .container end -->
+      </footer>
+      <!-- #footer end -->
+
+      <div class="copyright-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="title">COMPANY-NAME 2015. All RIGHTS RESERVED.</p>
+            </div>
+            <!-- .col-md-6 end -->
+
+            <div class="col-md-6">
+              <p class="align-right title">DESIGNED AND DEVELOPED BY SHRIRAM BALAJI for CENTAURI SERVICES</p>
+            </div>
+            <!-- .col-md-6 end -->
+          </div>
+          <!-- .row end -->
+        </div>
+        <!-- .container end -->
+      </div>
+      <!-- .copyright-container end -->
+
+      <a href="#top" class="scroll-up">Scroll</a>
+    </div>
+
+  </div>
+
+
+  </body>
+</html>
