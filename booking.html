@@ -1,4 +1,7 @@
-
+<?php 
+session_start();
+?>
+<!DOCTYPE html>
 <head>
 <!-- Place this data between the <head> tags of your website -->
 <meta name="keywords" content="Cargo service, Chennai, India, Company Name, Low price Cargo">
@@ -115,10 +118,12 @@
       <div class="modal-body">
        <form role="form" id="booking_form">
        <div class="form-group">
+       <label for="name">Name</label>
+       	<input type="text"  class="form-control" id="name"/></br>
        <label for="email">Email</label>
        	<input type="text"  class="form-control" id="email"/></br>
-       	<label for="number">Number</label>
-       	<input type="text" class="form-control" id="number"/>
+       	<label for="contact">Contact</label>
+       	<input type="text" class="form-control" id="contact"/>
        </form>
        </div>
       </div>
@@ -365,16 +370,17 @@ function initialize()
 			});
 		}); //]]>
 
-      $('btn_book').click(function(event) {
+      $('#btn_book').click(function(event) {
       	/* Act on the event */
+      	var name = $('#name').val();
       	var email = $('#email').val();
-      	var contact = $('#number').val();
+      	var contact = $('#contact').val();
 
       	$.ajax({
-      		url: '../booking.php',
-      		type: ' POST',
+      		url: '../register.php',
+      		type: 'POST',
       		dataType: 'json',
-      		data: {email: email , contact : contact},
+      		data: {name : name, email: email , contact : contact},
       	})
       	.done(function() {
       		console.log("success");
