@@ -2,7 +2,7 @@
       <?php
 try{
 
-        ini_set("display_errors", TRUE);
+  ini_set("display_errors", TRUE);
 
 define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST')); //ENSURES THE DB CONNECTION//
 define('DB_PORT',getenv('OPENSHIFT_MYSQL_DB_PORT')); 
