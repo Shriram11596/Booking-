@@ -2,7 +2,11 @@
 session_start();
 require_once 'connection.php';
 try {
-
+	if(isset($_POST['token']))
+	{
+$token = $_POST['token'];
+echo $token;
+}
 $name = $_POST['name'];
 $email = $_POST['email'];
 $contact = $_POST['contact'];
