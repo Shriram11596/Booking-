@@ -1,0 +1,409 @@
+<?php 
+session_start();
+?>
+<!DOCTYPE html>
+<head>
+<!-- Place this data between the <head> tags of your website -->
+<meta name="keywords" content="Cargo service, Chennai, India, Company Name, Low price Cargo">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../css/book.css">
+
+<link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!--for adding fonticons -->
+
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script
+  src="//maps.googleapis.com/maps/api/js?key=AIzaSyA6sxMfaCAG1mHvrloIF5xkLWSNQ9EP_64&libraries=places">
+</script>
+
+	<!--style-->
+
+
+</head>
+
+<body onload="initialize()">
+
+
+
+	<div class="container-fluid" <div class="row">
+		<div class="col-md-12">
+
+			<div class="page-header">
+	</div>
+
+
+
+
+
+
+
+
+	<div class="container-fluid">
+			<div class="row">
+
+				<div class="col-md-4">
+
+
+					<div id="inputs">
+
+
+						<FORM NAME="test">
+
+							<H1>Get it Delivered!</H1>
+							<h4>Source:</h4>
+							<INPUT TYPE="TEXT" ID="Origin" NAME="Pickup" style="width: 80%;">
+							<h4>Destination:</h4>
+							<INPUT TYPE="TEXT" ID="Destination" NAME="DropOff" style="width: 80%;">
+							<h4>Cargo Weight (kg):</h4>
+							<INPUT TYPE="text" ID="Weight" NAME="Weight" style="width: 80%;">
+							<h4>Please choose the size of the required vehicle:</h4>
+							<div>
+								<input name="dest_type" id="light" value="14" type="radio" />
+								<label for="radio3">14 ft. (Light Truck)</label>
+								<br>
+								<input name="dest_type" id="medium" value="17" type="radio" />
+								<label for="radio4">17 ft. (Medium Truck)</label>
+								<br>
+								<input name="dest_type" id="heavy" value="19" type="radio" />
+								<label for="radio5">19 ft. (Heavy truck)</label>
+								<br>
+
+								<br>
+							</div>
+							<br>
+
+						</FORM>
+
+						<p>
+
+							<div id="outputDiv"></div>
+							<a class="btn btn-primary" role="button" onclick="calculateDistances();">Get Quote</a>
+								<button class="btn btn-primary"  data-toggle="modal" data-target="#myModal">Book Now</button>
+
+
+						</p>
+
+					</div>
+				</div>
+
+				<div class="col-md-8">
+					<div id="map-canvas" ></div>
+				</div>
+
+			</div>
+
+		</div>
+
+		</div>
+
+		<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Please Enter your details below.</h4>
+      </div>
+      <div class="modal-body">
+       <form role="form" id="booking_form">
+       <div class="form-group">
+       <label for="name">Name</label>
+       	<input type="text"  class="form-control" id="name"/></br>
+       <label for="email">Email</label>
+       	<input type="text"  class="form-control" id="email"/></br>
+       	<label for="contact">Contact</label>
+       	<input type="text" class="form-control" id="contact"/>
+       </form>
+       </div>
+      </div>
+      <div class="modal-footer">
+
+<button type="button" id="btn_book" class="btn btn-default" data-dismiss="modal">Book Now</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+		<!-- /.container-fluid -->
+
+	<!-- Autocomplete Section-->
+
+	<script type="text/javascript">
+
+
+function initialize()
+{
+  init_source();
+  init_dest();
+}
+
+
+		function init_source() {
+			var input = document.getElementById('Origin');
+			var options = {
+				componentRestrictions: {
+					country: 'in'
+				}
+			};
+
+			new google.maps.places.Autocomplete(input, options);
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+
+	<script type="text/javascript">
+		function init_dest() {
+			var input = document.getElementById('Destination');
+			var options = {
+				componentRestrictions: {
+					country: 'in'
+				}
+			};
+
+			new google.maps.places.Autocomplete(input, options);
+		}
+
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+
+	<!-- Autocomplete End-->
+
+	<!-- Calculate Distance-->
+
+
+	<script>
+		var map;
+		var geocoder;
+		var bounds = new google.maps.LatLngBounds();
+		var markersArray = [];
+
+
+		var distance ;
+
+		var destinationIcon = '../img/truck3.png';
+		var originIcon = '../img/truck4.png';
+
+	/*	var infowindow = new google.maps.InfoWindow({
+
+  }); for creating a popup about a place on click . . . not needed  now */
+
+		function initializeDistCalc() {
+
+
+			var opts = {
+				center: new google.maps.LatLng( 12.9271912,77.9031956), //lat and longitude of south India
+				zoom: 6,
+			};
+			map = new google.maps.Map(document.getElementById('map-canvas'), opts);
+			geocoder = new google.maps.Geocoder();
+
+		}
+
+		function calculateDistances() {
+			var service = new google.maps.DistanceMatrixService();
+
+			var origin1 = document.getElementById('Origin').value;
+			var destinationA = document.getElementById('Destination').value;
+
+			var Weight = document.getElementById('Weight').value;
+
+			if (!$("input[name='dest_type']:checked").val()) {
+				alert('Please select a size from the available options.');
+
+
+      } else {
+
+
+
+
+				if (document.getElementById('light').checked) {
+					var size = 14;
+				} else if (document.getElementById('medium').checked) {
+					var size = 17;
+				} else if (document.getElementById('heavy').checked) {
+					var size = 19;
+				}
+
+
+
+
+
+				service.getDistanceMatrix({
+					origins: [origin1],
+					destinations: [destinationA],
+
+					travelMode: google.maps.TravelMode.DRIVING,
+					unitSystem: google.maps.UnitSystem.METRIC,
+					avoidHighways: false,
+					avoidTolls: false
+				}, callback);
+			}
+		}
+
+		function callback(response, status) {
+
+
+
+			if (status != google.maps.DistanceMatrixStatus.OK) {
+				alert('Error was: ' + status);
+			} else {
+				var origins = response.originAddresses;
+				var destinations = response.destinationAddresses;
+			console.log(response);
+				var outputDiv = document.getElementById('outputDiv');
+				outputDiv.innerHTML = '';
+				deleteOverlays();
+
+				for (var i = 0; i < origins.length; i++) {
+					var results = response.rows[i].elements;
+					console.log(results);
+					var distance = results[i].distance.text;
+
+
+					addMarker(origins[i], false);
+					for (var j = 0; j < results.length; j++) {
+						addMarker(destinations[j], true);
+
+            var comma = distance.replace( /,/g, "" );/*removing comma and Note the g (global) flag on the regular expression, which matches all instancesof ",".*/
+            var str = comma.replace("m","");//removing the metre fr shorter dustaces to avoid NaN
+						var raw = str.replace("k",""); //removing the k from km as m is already removed from distance or answer will be NaN
+            console.log(raw);
+            if (document.getElementById('light').checked) {
+              var cost = raw * 11;
+
+            } else {
+
+              var cost = (raw * 11) + 2000 ;
+
+
+            }
+
+						//alert(raw);
+
+
+
+						//distance.push(price);
+//alert(distance);
+
+						//This is the Bit that prints the results to the screen.
+						//Redundant code below. Modified to just output the time.
+					/*	outputDiv.innerHTML += origins[i] + ' to ' + destinations[j] + ': ' + results[j].distance.text + ' in ' + results[j].duration.text + '<br>';
+						outputDiv.innerHTML += origins[i] + ' to ' + destinations[j] + ': ' + results[j].distance.text + ' in ' + results[j].duration.text + '<br>' + (Weight.value); */
+
+
+
+					}
+				}
+				outputDiv.innerHTML += '<div class="alert alert-success" role="alert">The distance  is ' + (distance) + ' and cost is Rs.'+cost+'</div>' ;
+
+			}
+		}
+
+		function addMarker(location, isDestination) {
+			var icon;
+			if (isDestination) {
+				icon = destinationIcon;
+			} else {
+				icon = originIcon;
+			}
+			geocoder.geocode({
+				'address': location
+			}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					bounds.extend(results[0].geometry.location);
+					map.fitBounds(bounds);
+					var marker = new google.maps.Marker({
+						map: map,
+						position: results[0].geometry.location,
+						icon: icon,
+						draggable:true,
+						});
+					markersArray.push(marker);
+					marker.setMap(map);
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+
+				marker.addListener('click', function() {
+	infowindow.open(map, marker);
+});
+
+			});
+		}
+
+		function deleteOverlays() {
+			for (var i = 0; i < markersArray.length; i++) {
+				markersArray[i].setMap(null);
+			}
+			markersArray = [];
+		}
+
+		google.maps.event.addDomListener(window, 'load', initializeDistCalc);
+
+
+		 <!-- END Calculate Distance-->
+	</script>
+
+
+	<script type='text/javascript'>
+		//<![CDATA[
+		$(window).load(function() {
+			$('input[name="dest_type"]').on('change', function() {
+
+				$('input[id="size"]').val($(this).val());
+				//   $('input[type="text"]').val('');
+
+
+			});
+		}); //]]>
+
+      $('#btn_book').click(function(event) {
+      	/* Act on the event */
+      	var name = $('#name').val();
+      	var email = $('#email').val();
+      	var contact = $('#contact').val();
+
+      	$.ajax({
+      		url: 'register.php',
+      		type: 'POST',
+      		
+      		data: {name : name, email: email , contact : contact},
+      	})
+      	.done(function() {
+      		console.log("success");
+      	})
+      	.fail(function() {
+      		console.log("error");
+      	})
+      	.always(function() {
+      		console.log("complete");
+      	});
+      	
+      });
+
+	</script>
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>
